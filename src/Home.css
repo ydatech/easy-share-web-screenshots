@@ -1,0 +1,7 @@
+.Home {
+    display: flex;
+    padding-top: 100px;
+    min-height: 520px;
+    width: 1200px;
+    justify-content: space-between;
+}

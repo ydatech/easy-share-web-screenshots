@@ -1,0 +1,8 @@
+.NavbarContainer{
+    position: fixed;
+    width: 100%;
+    background-color: rgb(63, 81, 181);
+    display: flex;
+    justify-content: center;
+    z-index: 2000;
+}
