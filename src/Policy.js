@@ -5,6 +5,7 @@ import React, { Component } from 'react'
 
 export default class Policy extends Component {
     render() {
+        const origin = location.origin
         return (
             <div style={{ paddingTop: 100, maxWidth: 1200 }}>
 
@@ -61,11 +62,11 @@ export default class Policy extends Component {
                     <b>Contacting us</b><br /><br />
 
                     If you have any questions about this Privacy Policy, the practices of this site, or your dealings with this site, please contact us at:<br />
-                    <a href="http://esws.embed33.in">Easy Share Web Screenshots (ESWS)</a><br />
-                    <a href="http://esws.embed33.in">http://esws.embed33.in</a><br />
+                    <a href={origin}>Easy Share Web Screenshots (ESWS)</a><br />
+                    <a href={origin}>{origin}</a><br />
                     Jl.Kadipaten Raya No.15 Antapani Bandung Indonesia<br />
                     +6289653023212<br />
-                    info@embed33.in<br />
+                    info@{location.host}<br />
                     <br />
 
 

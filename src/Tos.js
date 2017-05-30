@@ -6,6 +6,7 @@ import React, { Component } from 'react'
 
 export default class Tos extends Component {
     render() {
+        const origin = location.origin
         return (
             <div style={{ paddingTop: 100, maxWidth: 1200 }}>
 
@@ -30,11 +31,11 @@ export default class Tos extends Component {
                 <p>By continuing to access or use our Service after those revisions become effective, you agree to be bound by the revised terms. If you do not agree to the new terms, please stop using the Service.</p>
                 <p><strong>Contact Us</strong></p>
                 <p>If you have any questions about these Terms, please contact us.</p>
-                <a href="http://esws.embed33.in">Easy Share Web Screenshots (ESWS)</a><br />
-                <a href="http://esws.embed33.in">http://esws.embed33.in</a><br />
+                <a href={origin}>Easy Share Web Screenshots (ESWS)</a><br />
+                <a href={origin}>{origin}</a><br />
                 Jl.Kadipaten Raya No.15 Antapani Bandung Indonesia<br />
                 +6289653023212<br />
-                info@embed33.in<br />
+                info@{location.host}<br />
                 <br />
             </div>
         )
