@@ -148,7 +148,7 @@ class App extends Component {
 
       let publishedScreenshots = response.data.filter((item, index) => {
         if (item.application) {
-          return item.application.id === '1930089280596101'
+          return item.application.id === window.FBConfig.appId
         } else {
           return false;
         }

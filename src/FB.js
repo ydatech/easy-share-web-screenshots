@@ -14,12 +14,14 @@ export const init = () => {
             window.fbAsyncInit = function () {
                 FB = window.FB
                 FB.init({
-                    appId: '129411924298905',
-                    xfbml: true,
-                    version: 'v2.9',
+                    ...{
+                        appId: '129411924298905',
+                        xfbml: true,
+                        version: 'v2.9',
 
-                    cookie: true
+                        cookie: true
 
+                    }, ...window.FBConfig
                 });
                 FB.AppEvents.logPageView();
 

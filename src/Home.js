@@ -183,7 +183,7 @@ export default class Home extends Component {
                         <h3>About This Website</h3>
                     </div>
                     <div>
-                        <p> Easy Share Web Screenshots (ESWS) is the easiest way to share website screenshots to your Facebook account. While using this site, you agree to have read and accepted our <Link to="/tos">terms of use</Link>, and <Link to="/pp">privacy policy</Link>. Copyright 2017 by embed33.in. All Rights Reserved.</p>
+                        <p> Easy Share Web Screenshots (ESWS) is the easiest way to share website screenshots to your Facebook account. While using this site, you agree to have read and accepted our <Link to="/tos">terms of use</Link>, and <Link to="/pp">privacy policy</Link>. Copyright 2017 by {location.hostname}. All Rights Reserved.</p>
                         <p> Powered By React.js</p>
                     </div>
                 </Paper>
