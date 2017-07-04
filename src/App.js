@@ -12,7 +12,7 @@ import axios from 'axios'
 // Components
 import SuccessDialog from './SuccessDialog'
 import Navbar from './Navbar'
-
+import AlbumDialog from './AlbumDialog'
 // Tap Plugin
 import injectTapEventPlugin from 'react-tap-event-plugin'
 injectTapEventPlugin()
@@ -32,12 +32,18 @@ class App extends Component {
       url: '',
       caption: ''
     },
+    albumData: {
+      name: '',
+      message: ''
+    },
     postId: '',
-    timelineAlbumId: null,
+    targetAlbumId: null,
     fbPost: {},
     shouldOpenDialog: false,
     publishedScreenshots: [],
-    isFetchingPublished: false
+    isFetchingPublished: false,
+    openAlbumDialog: false,
+    albums: []
   }
   componentDidMount() {
 
@@ -91,8 +97,9 @@ class App extends Component {
             return album.type === 'wall';
           })
           if (timelineAlbum) {
-            this.setState({ timelineAlbumId: timelineAlbum.id })
+            this.setState({ targetAlbumId: timelineAlbum.id })
           }
+          this.setState({ albums: response.albums.data })
 
         }
       }
@@ -128,17 +135,34 @@ class App extends Component {
   postToFacebook = () => {
     this.setState({ isPosting: true })
     let url = `${this.state.user.id}/photos`
-    if (this.state.timelineAlbumId) {
-      url = `${this.state.timelineAlbumId}/photos`
+    console.log(this.state.targetAlbumId)
+    if (this.state.targetAlbumId) {
+      console.log('here')
+      url = `${this.state.targetAlbumId}/photos`
     }
+    console.log(url)
     FB.api(url, 'post', { ...this.state.postData }).then((response) => {
       let post = response
       FB.api(`${post.id}`, 'get', { fields: 'id,link,created_time' }).then((response) => {
-        this.setState({ fbPost: response, isPosting: false, postId: post.post_id, shouldOpenDialog: true })
+        this.setState({ fbPost: response, isPosting: false, postId: post.post_id, shouldOpenDialog: true, openAlbumDialog: false })
       })
     }).catch((error) => {
 
       this.setState({ isPosting: false })
+    })
+  }
+
+  createAlbumAndSave = () => {
+    this.setState({ isPostingToAlbum: true })
+    FB.api(`${this.state.user.id}/albums`, 'post', { ...this.state.albumData }).then((response) => {
+
+      console.log(response)
+      this.setState({ targetAlbumId: response.id, openAlbumDialog: false })
+      this.postToFacebook()
+    }).catch((error) => {
+
+      this.setState({ isPostingToAlbum: false })
+      alert('Error! Album is not created')
     })
   }
 
@@ -193,6 +217,12 @@ class App extends Component {
             postId={this.state.postId}
             fbPost={this.state.fbPost}
             updateAppState={this.updateAppState}
+          />
+          <AlbumDialog
+            updateAppState={this.updateAppState}
+            createAlbumAndSave={this.createAlbumAndSave}
+            postToFacebook={this.postToFacebook}
+            appState={this.state}
           />
         </div>
       </MuiThemeProvider>

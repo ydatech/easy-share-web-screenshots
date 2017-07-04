@@ -65,7 +65,7 @@ export const login = () => {
             } else {
                 reject(response)
             }
-        }, { scope: "email,publish_actions,user_posts" })
+        }, { scope: "email,publish_actions,user_posts,user_photos" })
     })
 }
 export const logout = () => {

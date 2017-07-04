@@ -28,7 +28,8 @@ export default class Home extends Component {
             isFetching,
             getTheScreenshot,
             postToFacebook,
-            isPosting
+            isPosting,
+            isPostingToAlbum
          } = this.props
 
         let previewStyle = { maxWidth: 510 }
@@ -169,13 +170,23 @@ export default class Home extends Component {
                     <div className="Header">
                         <h3>7. Post To Facebook</h3>
                     </div>
-                    <div>
+                    <div style={{ marginBottom: 20 }}>
                         <RaisedButton
                             onTouchTap={() => { postToFacebook() }}
                             label={isPosting ? "Sending To Facebook" : "Post To Facebook"}
                             primary={true}
                             //style={styles.button}
                             icon={<FontIcon className={isPosting ? "fa fa-spinner fa-spin" : "fa fa-paper-plane"} />}
+                            disabled={!isLoggedIn || postData.url.length < 1 || postData.caption.length < 1 || isFetching || isPosting}
+                        />
+                    </div>
+                    <div style={{ marginBottom: 20 }}>
+                        <RaisedButton
+                            onTouchTap={() => { updateAppState({ openAlbumDialog: true }) }}
+                            label={isPosting ? "Saving To An Album" : "Save To An Album"}
+                            primary={true}
+                            //style={styles.button}
+                            icon={<FontIcon className={isPosting ? "fa fa-spinner fa-spin" : "fa fa-picture-o"} />}
                             disabled={!isLoggedIn || postData.url.length < 1 || postData.caption.length < 1 || isFetching || isPosting}
                         />
                     </div>
